@@ -1,3 +1,4 @@
+const bodyParser = require("body-parser");
 const cors = require("cors");
 const express = require("express");
 const routes = require("../api/routes");
@@ -18,6 +19,8 @@ class Boot {
 
   middlewares(){
     this.express.use(cors());
+    this.express.use(bodyParser.json({ limit: '5mb', extended: true }));
+    this.express.use(bodyParser.urlencoded({ limit: '5mb', extended: true }));
     this.express.use(express.json());
   }
 
