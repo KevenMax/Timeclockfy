@@ -4,7 +4,8 @@
   "author": "Keven Max",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon src/utils/boot",
+    "start": "node src/utils/boot",
+    "dev": "nodemon src/utils/boot",
     "db:make": "knex migrate:make",
     "db:all": "knex migrate:latest",
     "db:rollback": "knex migrate:rollback",
