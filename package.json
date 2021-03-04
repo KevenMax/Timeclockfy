@@ -1,0 +1,18 @@
+{
+  "name": "timeclockfy",
+  "version": "1.0.0",
+  "author": "Keven Max",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon src/utils/boot"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "yup": "^0.32.9"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
