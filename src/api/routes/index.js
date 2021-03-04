@@ -1,8 +1,8 @@
-
+const CheckIn = require("../handlers/CheckIn");
 
 module.exports = router => {
 
-  router.get('/clock', (req, res) => (res.status(200).json({message: 'OK'})) )
+  router.post('/check-in', CheckIn.store)
 
   return router;
-}
+};
