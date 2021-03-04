@@ -31,7 +31,7 @@ class Boot {
   start(){
     const PORT_API = process.env.PORT_API || 4000;
     this.express.listen(PORT_API, () => {
-      console.log(`Timeclockfy started on port ${PORT_API}`);
+      console.log(`🚀 Timeclockfy started on port ${PORT_API}`);
     });
   }
 }
