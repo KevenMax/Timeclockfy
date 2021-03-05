@@ -1,5 +1,5 @@
 class NotFoundError {
-  constructor(message = "Record not found"){
+  constructor(message = "Record Not Found"){
     this.message = message;
   }
 }
