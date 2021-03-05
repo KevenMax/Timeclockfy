@@ -6,6 +6,7 @@ module.exports = router => {
   router.get('/records/:id', RecordHandler.show);
   router.get('/records', RecordHandler.index);
   router.delete('/records/:id', RecordHandler.delete);
+  router.patch('/records/:id', RecordHandler.update);
 
   return router;
 };

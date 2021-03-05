@@ -61,6 +61,22 @@ class RecordCore {
     return !!record;
   }
 
+
+  async updateById({id, picture, location, time, date}){
+    const [ record ] = await db('records').where("id", id)
+    .update({ picture, location, time, date })
+    .returning(["id", "picture", "location", "time", "date"])
+    .catch(() => {
+      throw new DBError();
+    })
+    
+    if(!record){
+      throw new NotFoundError();
+    }
+
+    return record;
+  }
+
 };
 
 module.exports = new RecordCore();

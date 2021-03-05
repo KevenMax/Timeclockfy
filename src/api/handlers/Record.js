@@ -153,8 +153,67 @@ class RecordHandler {
    
   }
 
-  update(){
+  async update(req, res){
+    const { picture, location, time, date } = req.body;
+    const { id } = req.params;
 
+    const data = { id, picture, location, time, date };
+    
+    const schema = Yup.object().shape({
+      id: Yup.number().integer().positive().required('Record ID required'),
+      picture: Yup.string(),
+      location: Yup.object().shape({
+        latitude: Yup.number(),
+        longitude: Yup.number(),
+      }),
+      time: Yup.string(),
+      date: Yup.string(),
+    });
+
+    try {
+      const params = { abortEarly: false };
+
+      await schema.validate(data, params);
+
+      const record = await RecordCore.updateById(data);
+
+      res.status(200).json(record);
+    } catch(error) {
+
+      if(error instanceof Yup.ValidationError) {
+        return res.status(400).json({ 
+          error: { 
+            message: "The some data don't was send correctly",
+            details: error.errors,
+          }
+        });    
+      }
+
+      if(error instanceof NotFoundError){
+        return res.status(400).json({ 
+          error: { 
+            message: "Not Found",
+            details: error.message,
+          }
+        });
+      }
+
+      if(error instanceof DBError) {
+        return res.status(500).json({ 
+          error: { 
+            message: "Internal server error",
+            details: error.message,
+          }
+        });
+      }
+
+      return res.status(500).json({ 
+        error: { 
+          message: "Internal server error",
+        }
+      });
+
+    }
   }
 
   async delete(req, res){
