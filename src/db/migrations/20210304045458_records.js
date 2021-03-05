@@ -5,9 +5,9 @@ exports.up = function(knex) {
     table.date('date').notNullable();
     table.time('time').notNullable();
     table.json('location').notNullable();
-    table.string('picture').notNullable();
+    table.text('picture').notNullable();
     table.boolean('enabled').defaultTo(true);
-    table.timestamps();
+    table.timestamps(false, true);
   });
 };
 
