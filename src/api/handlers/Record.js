@@ -106,7 +106,7 @@ class RecordHandler {
   async show(req, res){
     const { id } = req.params;
 
-    const schema = Yup.number().required('Record ID required');
+    const schema = Yup.number().integer().positive().required('Record ID required');
 
     try {
       const params = { abortEarly: false };
@@ -157,8 +157,53 @@ class RecordHandler {
 
   }
 
-  delete(){
+  async delete(req, res){
+    const { id } = req.params;
 
+    const schema = Yup.number().integer().positive().required('Record ID required');
+
+    try {
+      const params = { abortEarly: false };
+
+      await schema.validate(id, params);
+
+      await RecordCore.deleteById(id);
+
+      res.status(204).json();
+    } catch(error) {
+      if(error instanceof Yup.ValidationError) {
+        return res.status(400).json({ 
+          error: { 
+            message: "The some data don't was send correctly",
+            details: error.errors,
+          }
+        });    
+      }
+
+      if(error instanceof NotFoundError){
+        return res.status(400).json({ 
+          error: { 
+            message: "Not Found",
+            details: error.message,
+          }
+        });
+      }
+
+      if(error instanceof DBError) {
+        return res.status(500).json({ 
+          error: { 
+            message: "Internal server error",
+            details: error.message,
+          }
+        });
+      }
+
+      return res.status(500).json({ 
+        error: { 
+          message: "Internal server error",
+        }
+      });
+    }
   }
   
 }

@@ -46,6 +46,21 @@ class RecordCore {
     return records;
   }
 
+
+  async deleteById(id){
+    const record = await db('records').where("id", id)
+    .update({enabled: false})
+    .catch(() => {
+      throw new DBError();
+    })
+
+    if(!record){
+      throw new NotFoundError();
+    }
+
+    return !!record;
+  }
+
 };
 
 module.exports = new RecordCore();
