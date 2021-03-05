@@ -1,8 +1,8 @@
-const CheckIn = require("../handlers/CheckIn");
+const RecordHandler = require("../handlers/Record");
 
 module.exports = router => {
 
-  router.post('/check-in', CheckIn.store)
+  router.post('/records/', RecordHandler.store);
 
   return router;
 };

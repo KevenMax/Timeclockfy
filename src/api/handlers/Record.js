@@ -1,6 +1,6 @@
 const Yup = require("yup");
 
-class CheckIn {
+class RecordHandler {
 
   index(req, res){
 
@@ -60,4 +60,4 @@ class CheckIn {
   
 }
 
-module.exports = new CheckIn();
+module.exports = new RecordHandler();
