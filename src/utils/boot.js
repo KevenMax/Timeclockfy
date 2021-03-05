@@ -2,7 +2,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const express = require("express");
 
-const connection = require("../db/connection");
+const Connection = require("../db/connection");
 const routes = require("../api/routes");
 
 require("dotenv").config();
@@ -29,7 +29,8 @@ class Boot {
   }
 
   async database(){
-    await connection();
+    await Connection.checkConnection();
+    await Connection.runMigrations();
   }
 
   routes(){
