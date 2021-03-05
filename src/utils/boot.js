@@ -1,7 +1,10 @@
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const express = require("express");
+
+const connection = require("../db/connection");
 const routes = require("../api/routes");
+
 require("dotenv").config();
 
 class Boot {
@@ -10,6 +13,7 @@ class Boot {
     this.middlewares();
     this.routes();
     this.start();
+    this.database();
   }
 
   init(){
@@ -24,6 +28,10 @@ class Boot {
     this.express.use(express.json());
   }
 
+  async database(){
+    await connection();
+  }
+
   routes(){
     this.express.use(routes(this.router));
   }
@@ -31,7 +39,7 @@ class Boot {
   start(){
     const PORT_API = process.env.PORT_API || 4000;
     this.express.listen(PORT_API, () => {
-      console.log(`🚀 Timeclockfy started on port ${PORT_API}`);
+      console.log(`🚀 Timeclockfy started on port ${PORT_API}\n`);
     });
   }
 }
