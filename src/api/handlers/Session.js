@@ -65,7 +65,6 @@ class SessionHandler {
         });
       }
 
-      console.log(error);
       return res.status(500).json({ 
         error: { 
           message: "Internal Server Error",
