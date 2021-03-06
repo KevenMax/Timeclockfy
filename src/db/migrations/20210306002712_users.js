@@ -1,8 +1,6 @@
-const { v4: uuidv4 } = require('uuid');
-
 exports.up = function(knex) {
   return knex.schema.createTable('users', function (table) {
-    table.uuid('id').primary().defaultTo(uuidv4());
+    table.uuid('id').primary().defaultTo(knex.raw('uuid_generate_v4()'));
     table.string('name').notNullable();
     table.string('email').notNullable().unique();
     table.string('password').notNullable();
