@@ -12,6 +12,7 @@
     "db:rollback:all": "knex migrate:rollback --all"
   },
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "date-fns": "^2.18.0",
@@ -20,6 +21,7 @@
     "knex": "^0.95.0",
     "path": "^0.12.7",
     "pg": "^8.5.1",
+    "uuid": "^8.3.2",
     "yup": "^0.32.9"
   },
   "devDependencies": {
