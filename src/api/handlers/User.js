@@ -14,7 +14,7 @@ class UserHandler {
     
     const schema = Yup.object().shape({
       name: Yup.string().required('Name required'), 
-      email: Yup.string().required('E-mail required'),
+      email: Yup.string().email('E-mail must be a valid email').required('E-mail required'),
       password: Yup.string().required('Password required').min(8),
     });
 
