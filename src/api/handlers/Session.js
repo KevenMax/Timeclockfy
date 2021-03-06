@@ -2,7 +2,6 @@ const Yup = require("yup");
 
 const UserCore = require("../core/User");
 
-const DBError = require("../utils/errors/DBError");
 const InvalidError = require("../utils/errors/InvalidError");
 const NotFoundEnvError = require("../utils/errors/NotFoundEnvError");
 const NotFoundError = require("../utils/errors/NotFoundError");
