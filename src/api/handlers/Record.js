@@ -38,7 +38,7 @@ class RecordHandler {
       if(error instanceof DBError) {
         return res.status(500).json({ 
           error: { 
-            message: "Internal server error",
+            message: "Internal Server Error",
             details: error.message,
           }
         });
@@ -46,7 +46,7 @@ class RecordHandler {
 
       return res.status(500).json({ 
         error: { 
-          message: "Internal server error",
+          message: "Internal Server Error",
         }
       });
 
@@ -88,7 +88,7 @@ class RecordHandler {
       if(error instanceof DBError) {
         return res.status(500).json({ 
           error: { 
-            message: "Internal server error",
+            message: "Internal Server Error",
             details: error.message,
           }
         });
@@ -96,7 +96,7 @@ class RecordHandler {
 
       return res.status(500).json({ 
         error: { 
-          message: "Internal server error",
+          message: "Internal Server Error",
         }
       });
 
@@ -138,7 +138,7 @@ class RecordHandler {
       if(error instanceof DBError) {
         return res.status(500).json({ 
           error: { 
-            message: "Internal server error",
+            message: "Internal Server Error",
             details: error.message,
           }
         });
@@ -146,7 +146,7 @@ class RecordHandler {
 
       return res.status(500).json({ 
         error: { 
-          message: "Internal server error",
+          message: "Internal Server Error",
         }
       });
     }
@@ -201,7 +201,7 @@ class RecordHandler {
       if(error instanceof DBError) {
         return res.status(500).json({ 
           error: { 
-            message: "Internal server error",
+            message: "Internal Server Error",
             details: error.message,
           }
         });
@@ -209,7 +209,7 @@ class RecordHandler {
 
       return res.status(500).json({ 
         error: { 
-          message: "Internal server error",
+          message: "Internal Server Error",
         }
       });
 
@@ -251,7 +251,7 @@ class RecordHandler {
       if(error instanceof DBError) {
         return res.status(500).json({ 
           error: { 
-            message: "Internal server error",
+            message: "Internal Server Error",
             details: error.message,
           }
         });
@@ -259,7 +259,7 @@ class RecordHandler {
 
       return res.status(500).json({ 
         error: { 
-          message: "Internal server error",
+          message: "Internal Server Error",
         }
       });
     }
