@@ -21,6 +21,10 @@ As the API only supports the records, but as a roadmap we will add the possibili
   # or
   git clone https://github.com/KevenMax/timeclockfy.git
 ```
+- Enter in the project.
+```bash
+  cd timeclockfy
+```
 - Create a database on your PostgreSQL client.
 - Define your environment variables, so run:
 ```bash
