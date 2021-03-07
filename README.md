@@ -15,9 +15,15 @@ As the API only supports the records, but as a roadmap we will add the possibili
 
 ## Setup
 
+- First, clone this repository.
+```bash
+  git clone git@github.com:KevenMax/timeclockfy.git
+  # or
+  git clone https://github.com/KevenMax/timeclockfy.git
+```
 - Create a database on your PostgreSQL client.
 - Define your environment variables, so run:
-```
+```bash
   cp .env-example .env
 ```
 - Change the database variables according to your data of database.
