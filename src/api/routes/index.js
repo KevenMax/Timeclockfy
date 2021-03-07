@@ -6,11 +6,31 @@ module.exports = router => {
   router.post('/users', UserHandler.store);
   router.post('/users/auth', SessionHandler.store);
 
-  router.post('/records/', RecordHandler.store);
-  router.get('/records/:id', RecordHandler.show);
-  router.get('/records', RecordHandler.index);
-  router.delete('/records/:id', RecordHandler.delete);
-  router.patch('/records/:id', RecordHandler.update);
+  router.post(
+    '/records/', 
+    SessionHandler.authenticate('employee'),
+    RecordHandler.store,
+  );
+  router.get(
+    '/records/:id',
+    SessionHandler.authenticate('employee'),
+    RecordHandler.show,
+  );
+  router.get(
+    '/records',
+    SessionHandler.authenticate('employee'),
+    RecordHandler.index
+  );
+  router.patch(
+    '/records/:id',
+    SessionHandler.authenticate('manager'),
+    RecordHandler.update,
+  );
+  router.delete(
+    '/records/:id',
+    SessionHandler.authenticate('manager'),
+    RecordHandler.delete,
+  );
 
   return router;
 };

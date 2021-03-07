@@ -1,3 +1,4 @@
+const jwt = require("jsonwebtoken");
 const Yup = require("yup");
 
 const UserCore = require("../core/User");
@@ -70,6 +71,64 @@ class SessionHandler {
         }
       });
 
+    }
+  }
+
+  authenticate(...roles){
+    const isAllowed = role => roles.indexOf(role) > -1;
+    const isManager = role => role === 'manager';
+  
+    return (req, res, next) => {
+      const { authorization } = req.headers;
+  
+      if (!authorization) {
+        return res.status(400).json({ 
+          error: { 
+            message: 'Bad Request', 
+            details: 'Token not sent',
+          } 
+        });
+      }
+  
+      try {
+        const secret = process.env.APP_SECRET;
+
+        if(!secret){
+          throw new NotFoundEnvError("Not found secret environment");
+        }
+
+        const decoded = jwt.verify(authorization, secret);
+
+        req.user = decoded;
+  
+        if (req.user && (isAllowed(req.user.role) || isManager(req.user.role))) {
+          return next();
+        }
+        return res.status(403).json({
+          error: { 
+            message: 'Forbidden',
+            details: 'Access not allowed',
+          },
+        });
+      } catch (error) {
+
+        if(error instanceof NotFoundEnvError){
+          return res.status(500).json({ 
+            error: { 
+              message: "Internal Server Error",
+              details: error.message,
+            }
+          });
+        }
+
+        return res
+          .status(401)
+          .json({ error: { 
+            message: 'Unauthorized',
+            details: 'Invalid token',
+          }
+        });
+      }
     }
   }
 }
