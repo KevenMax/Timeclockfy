@@ -9,7 +9,7 @@ class RecordHandler {
   async index(req, res){
     const { page = 1, offset = 20 } = req.query;
 
-    const data = { page, offset };
+    const data = { page, offset, user_id: req.user.id };
 
     const schema = Yup.object().shape({
       page: Yup.number().integer().positive(),
@@ -56,7 +56,7 @@ class RecordHandler {
   async store(req, res){
     const { picture, location } = req.body;
 
-    const data = { picture, location };
+    const data = { picture, location, user_id: req.user.id };
     
     const schema = Yup.object().shape({
       picture: Yup.string().required('Picture required'),
@@ -106,14 +106,18 @@ class RecordHandler {
   async show(req, res){
     const { id } = req.params;
 
-    const schema = Yup.number().integer().positive().required('Record ID required');
+    const data = { id, user_id: req.user.id }
+
+    const schema = Yup.object().shape({
+      id: Yup.string().uuid().required('Record ID required'),
+    });
 
     try {
       const params = { abortEarly: false };
 
-      await schema.validate(id, params);
+      await schema.validate(data, params);
 
-      const record = await RecordCore.getById(id);
+      const record = await RecordCore.getById(data);
 
       res.status(200).json(record);
     } catch(error) {
@@ -160,7 +164,7 @@ class RecordHandler {
     const data = { id, picture, location, time, date };
     
     const schema = Yup.object().shape({
-      id: Yup.number().integer().positive().required('Record ID required'),
+      id: Yup.string().uuid().required('Record ID required'),
       picture: Yup.string(),
       location: Yup.object().shape({
         latitude: Yup.number(),
@@ -219,7 +223,7 @@ class RecordHandler {
   async delete(req, res){
     const { id } = req.params;
 
-    const schema = Yup.number().integer().positive().required('Record ID required');
+    const schema = Yup.string().uuid().required('Record ID required');
 
     try {
       const params = { abortEarly: false };
