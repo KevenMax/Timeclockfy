@@ -22,7 +22,7 @@ class Boot {
   }
 
   middlewares(){
-    this.express.use(cors());
+    this.express.use(cors({exposedHeaders: ["token"]}));
     this.express.use(bodyParser.json({ limit: '5mb', extended: true }));
     this.express.use(bodyParser.urlencoded({ limit: '5mb', extended: true }));
     this.express.use(express.json());
