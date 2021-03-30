@@ -48,7 +48,7 @@ class SessionHandler {
       }
 
       if(error instanceof InvalidError) {
-        return res.status(401).json({ 
+        return res.status(400).json({ 
           error: { 
             message: "Unauthorized",
             details: error.message,
